@@ -1,11 +1,7 @@
 sudo apt update
 sudo apt install -y docker.io nfs-common dnsutils curl
 
-curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="\
-    --disable traefik \
-    --disable metrics-server \
-    --node-name master --docker" \
-    sudo sh -s -
+curl -sfL https://get.k3s.io | sh -s -
 
 mkdir ~/.kube
 sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config

@@ -1,12 +1,6 @@
 NODE_TOKEN=
 MASTER_IP=
-WORKER_NO=
 
-sudo apt update
-sudo apt install -y docker.io nfs-common curl
-
-# k3s worker 노드 설치
 curl -sfL https://get.k3s.io | K3S_URL=https://$MASTER_IP:6443 \
     K3S_TOKEN=$NODE_TOKEN \
-    INSTALL_K3S_EXEC="--node-name worker$WORKER_NO --docker" \
-    sudo sh -s -
+    sh -s -
