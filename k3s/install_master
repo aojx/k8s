@@ -1,0 +1,18 @@
+sudo apt update
+sudo apt install -y docker.io nfs-common dnsutils curl
+
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="\
+    --disable traefik \
+    --disable metrics-server \
+    --node-name master --docker" \
+    sudo sh -s -
+
+mkdir ~/.kube
+sudo cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+sudo chown -R $(id -u):$(id -g) ~/.kube
+echo "export KUBECONFIG=~/.kube/config" >> ~/.bashrc
+source ~/.bashrc
+
+# check cluster status
+sudo kubectl cluster-info
+sudo kubectl get node -o wide
